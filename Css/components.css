@@ -30,32 +30,42 @@
 ======================= */
 .lang-switcher {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
   position: absolute;
-  top: 10px;
+  top: 15px;
   right: 20px;
 }
 
 .lang-btn {
-  background: var(--primary-color);
-  color: #fff;
-  border: none;
+  background: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
   padding: 6px 12px;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 0.9rem;
-  transition: background 0.3s ease, transform 0.2s ease;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  font-weight: 500;
 }
 
 .lang-btn:hover {
-  background: var(--primary-hover-color);
-  transform: translateY(-2px);
+  background: var(--primary-color);
+  color: white;
+  transform: translateY(-1px);
 }
 
-.lang-btn:active {
-  background: var(--primary-active-color);
-  transform: translateY(0);
+/* Mobile */
+@media (max-width: 768px) {
+  .lang-switcher {
+    top: 10px;
+    right: 15px;
+  }
+  
+  .lang-btn {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
 }
 
 /* =======================
@@ -72,29 +82,81 @@
 .tab-button {
   background: none;
   border: none;
-  color: var(--primary-color);
+  color: var(--text-color);
   font-size: 18px;
   margin: 0 10px;
   cursor: pointer;
-  padding: 10px 20px;
+  padding: 12px 24px;
   position: relative;
   display: inline-block;
   text-align: center;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, opacity 0.3s ease;
+  opacity: 0.7;
+  font-weight: 500;
 }
 
-.tab-button:hover,
-.tab-button[aria-selected="true"] {
+.tab-button:hover {
   color: var(--primary-hover-color);
-} 
+  opacity: 0.9;
+}
 
+.tab-button[aria-selected="true"] {
+  color: var(--primary-color);
+  opacity: 1;
+  font-weight: 600;
+}
+
+/* Indicador principal que se move */
 .tab-underline {
   position: absolute;
   bottom: 0;
   height: 3px;
-  background-color: var(--primary-color);
-  transition: all 0.3s ease;
+  background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 2px;
+  box-shadow: 0 0 10px rgba(0, 187, 255, 0.3);
+}
+
+/* Ponto luminoso que acompanha o underline */
+.tab-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -1.5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--primary-color);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Melhorias para o menu mobile */
+.mobile-menu .tab-button {
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+  border-radius: 6px;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+  font-weight: 500; /* Peso fixo */
+}
+
+.mobile-menu .tab-button:hover {
+  background-color: rgba(0, 187, 255, 0.1);
+  color: var(--primary-hover-color);
+  opacity: 0.9;
+}
+
+.mobile-menu .tab-button[aria-selected="true"] {
+  background: linear-gradient(135deg, rgba(0, 187, 255, 0.15), rgba(0, 187, 255, 0.05));
+  color: var(--primary-color);
+  opacity: 1;
+  text-shadow: 0 0 8px rgba(0, 187, 255, 0.2);
+  border-left: 3px solid var(--primary-color);
 }
 
 /* Conteúdo das abas */
@@ -102,13 +164,25 @@
   display: none;
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .tab-content.active {
   display: block;
   opacity: 1;
   transform: translateY(0);
+  animation: fadeInUp 0.4s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* =======================
@@ -163,6 +237,22 @@
   width: 100%;
   text-align: center;
   border-radius: 6px;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu .tab-button[aria-selected="true"] {
+  background: linear-gradient(135deg, rgba(0, 187, 255, 0.15), rgba(0, 187, 255, 0.05));
+  color: var(--primary-color);
+  opacity: 1;
+  font-weight: 600;
+  border-left: 3px solid var(--primary-color);
+}
+
+.mobile-menu .tab-button:hover {
+  background-color: rgba(0, 187, 255, 0.1);
+  color: var(--primary-hover-color);
+  opacity: 0.9;
 }
 
 .mobile-menu .tab-button:hover,
@@ -249,7 +339,6 @@
   justify-content: center;
   align-items: center;
   top: 50%;
-  transform: translateY(-50%);
   width: 40px;
   height: 40px;
   font-size: 1.2rem;
@@ -311,6 +400,134 @@
 .tag:hover {
   background-color: var(--primary-hover-color);
   color: #fff;
+}
+
+/* =======================
+   Estilos para Currículo
+======================= */
+.resume-card {
+  background: rgba(41, 41, 41, 0.3);
+  border-radius: 15px;
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  border: 1px solid var(--border-color);
+}
+
+.resume-card h3 {
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+
+.resume-description {
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.resume-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.resume-actions .download-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 25px;
+  font-size: 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.primary-btn {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.secondary-btn {
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.primary-btn:hover {
+  background-color: var(--primary-hover-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 187, 255, 0.3);
+  color: white;
+}
+
+.secondary-btn:hover {
+  background-color: rgba(0, 187, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.resume-summary {
+  background: rgba(41, 41, 41, 0.5);
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin-top: 1.5rem;
+}
+
+.resume-summary h4 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.resume-summary ul {
+  list-style: none;
+  padding: 0;
+}
+
+.resume-summary li {
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+  position: relative;
+  line-height: 1.6;
+}
+
+.resume-summary li:before {
+  content: "•";
+  color: var(--primary-color);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .resume-card {
+    padding: 1.5rem;
+    margin: 0 1rem;
+  }
+  
+  .resume-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .resume-actions .download-btn {
+    width: 100%;
+    max-width: 250px;
+    justify-content: center;
+  }
+  
+  .resume-summary {
+    padding: 1rem;
+  }
 }
 
 /* =======================

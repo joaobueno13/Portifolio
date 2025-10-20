@@ -212,14 +212,14 @@
   border: none;
 }
 
-/* Botão Primário (Contato) */
+/* Botão Primário (Projeto) */
 .cta-button.primary {
   background-color: var(--primary-color);
   color: white;
   box-shadow: 0 4px 15px rgba(0, 187, 255, 0.3);
 }
 
-/* Botão Secundário (Projetos) */
+/* Botão Secundário (Contato) */
 .cta-button.secondary {
   background: transparent;
   border: 2px solid var(--primary-color);
