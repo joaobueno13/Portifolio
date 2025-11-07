@@ -166,7 +166,6 @@
   transition: color 0.3s ease;
 }
 
-/* Adicione ao final do sections.css */
 @media (max-width: 768px) {
   .skills-grid {
     grid-template-columns: repeat(2, minmax(140px, 1fr));
@@ -215,6 +214,7 @@
 /* Botão Primário (Projeto) */
 .cta-button.primary {
   background-color: var(--primary-color);
+  opacity: 1;
   color: white;
   box-shadow: 0 4px 15px rgba(0, 187, 255, 0.3);
 }
@@ -229,6 +229,7 @@
 /* Efeitos Hover */
 .cta-button.primary:hover {
   background-color: var(--primary-hover-color);
+  opacity: 1;
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(0, 187, 255, 0.4);
 }
@@ -373,61 +374,86 @@
   color: #fff;
 }
 
-/* Media Queries para Responsividade */
-@media (max-width: 768px) {
-  /* Melhorias para projetos em mobile */
-  .project {
+/* =======================
+   Mobile Responsivo
+======================= */
+@media (max-width: 768px)
+{
+  main
+  {
     padding: 1rem;
-    margin-bottom: 1.5rem;
+    max-width: 100%;
+    overflow-x: hidden;
   }
-
-  .project h3 {
-    font-size: 1.4rem;
-  }
-
-  .carousel-images img,
-  .carousel-images .video-slide {
-    max-height: 250px;
-  }
-
-  .carousel-images .video-slide iframe {
-    height: 250px;
-  }
-
-  .carousel-button {
-    font-size: 1.8rem;
-    padding: 5px 15px;
-  }
-
-  .tags {
-    flex-wrap: wrap;
-    gap: 5px;
-  }
-
-  .tag {
-    font-size: 0.85rem;
-    padding: 4px 8px;
-  }
-
-  .download-btn {
+  
+  #hero
+  {
     width: 100%;
-    padding: 12px;
-    font-size: 1rem;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .about-container
+  {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+  
+  .about-left, 
+  .about-right
+  {
+    max-width: 100%;
+    width: 100%;
+    padding: 0 10px;
+  }
+  
+  /* Garantir que o texto não ultrapasse a tela */
+  .bio-text p
+  {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+  }
+  
+  .hero-cta
+  {
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+  
+  .cta-button
+  {
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
   }
 }
 
+/* Para telas muito pequenas */
 @media (max-width: 480px) {
-  /* Ajustes adicionais para telas muito pequenas */
-  .carousel-images img,
-  .carousel-images .video-slide {
-    max-height: 200px;
+  .about-container
+  {
+    padding: 0 10px;
   }
-
-  .carousel-images .video-slide iframe {
-    height: 200px;
+  
+  .about-left, 
+  .about-right
+  {
+    padding: 0 5px;
   }
-
-  .project p {
-    font-size: 1rem;
+  
+  .hero-cta
+  {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cta-button
+  {
+    max-width: 100%;
   }
 }
